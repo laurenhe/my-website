@@ -31,7 +31,7 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ('name', 'message', 'email',)
+        fields = ('name', 'email', 'message',)
 
     def clean_name(self):
         name = self.cleaned_data['name']
@@ -43,9 +43,22 @@ class CommentForm(forms.ModelForm):
     def clean_email(self):
         return self.cleaned_data['email'].lower()
 
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.fields['name'].label = "Name"
+        self.fields['email'].label = "Email"
+        self.fields['message'].label = "Message"
+
 
 class ContactForm(forms.ModelForm):
 
     class Meta:
         model = Contact
         fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        self.fields['name'].label = "Name"
+        self.fields['email'].label = "Email"
+        self.fields['subject'].label = "Subject"
+        self.fields['message'].label = "Message"

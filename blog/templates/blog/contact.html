@@ -1,33 +1,27 @@
 {% extends "blog/base.html" %}
+{% load widget_tweaks %}
 
 {% block content %}
 
     <div class="form">
         <h2>Get in touch!</h2>
-        {{ form.non_field_errors }}
-        <form action="" method="post">
+        <form method="post">
             {% csrf_token %}
-            <ul class="form-field">
-                <li>
-                    <label>Name <span class="required">*</span></label>
-                    <input type="text" class="field-rect" style="background-color:#e8e8e8"/>
-                </li>
-                <li>
-                    <label>Email <span class="required">*</span></label>
-                    <input type="email" class="field-rect" style="background-color:#e8e8e8"/>
-                </li>
-                <li>
-                    <label>Subject <span class="required">*</span></label>
-                    <input type="subject" class="field-rect" style="background-color:#e8e8e8"/>
-                </li>
-                <li>
-                    <label>Message <span class="required">*</span></label>
-                    <textarea class="field-rect field-textarea" style="background-color:#e8e8e8"></textarea>
-                </li>
-                <li>
-                    <input type="submit" value="Submit" />
-                </li>
-            </ul>
+
+            {% for hidden_field in form.hidden_fields %}
+              {{ hidden_field }}
+            {% endfor %}
+
+            {% for field in contact_form.visible_fields %}
+              <div class="form-field">
+                {{ field.label_tag }}
+                {% render_field field class="form-control" %}
+                {% if field.help_text %}
+                <small class="form-text text-muted">{{ field.help_text }}</small>
+                {% endif %}
+              </div>
+            {% endfor %}
+            <button id="submit">Submit</button>
         </form>
       </div>
 

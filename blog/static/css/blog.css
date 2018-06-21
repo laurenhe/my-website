@@ -54,7 +54,6 @@ h2 {
 }
 
 .page-header {
-  background-color: none;
   margin-top: 0;
   margin-bottom: 0;
   font-family: 'Josefin Sans';
@@ -164,21 +163,7 @@ Form Layout Styles
 .form-field {
     margin: 10px auto;
     max-width: 400px;
-    padding: 20px 12px 10px 20px;
-}
-
-.form-field li {
-    padding: 0;
-    display: block;
-    list-style: none;
-    margin: 10px 0 0 0;
-}
-
-.form-field label {
-    margin: 0 0 3px 0;
-    padding: 0px;
-    display: block;
-    font-weight: bold;
+    padding: 0px 12px 10px 20px;
 }
 
 .form-field input[type=text],
@@ -208,26 +193,14 @@ textarea {
     border: 1px solid #88D5E9;
 }
 
-.form-field .field-rect {
-    width: 100%;
-}
-
-.form-field {
-    width: 100%;
-}
-
-.form-field .field-textarea {
-    height: 100px;
-}
-
-.form-field input[type=submit] {
+#submit{
     background: #4B99AD;
     padding: 8px 15px 8px 15px;
     border: none;
     color: #fff;
 }
 
-.form-field input[type=submit]:hover {
+#submit:hover {
     background: #4691A4;
     box-shadow:none;
     -moz-box-shadow:none;

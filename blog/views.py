@@ -8,7 +8,6 @@ from django.contrib import messages
 
 def post_detail(request, pk, post_slug):
     post = get_object_or_404(Post, pk=pk)
-    import pdb; pdb.set_trace()
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -16,10 +15,14 @@ def post_detail(request, pk, post_slug):
             comment.post = post
             comment.save()
             messages.add_message(request, messages.INFO, 'Your message was added!')
-            return redirect('post_detail', pk=post.pk)
-    return render(request, 'blog/post_detail.html', {'post': post})
+            return redirect('post_detail', pk=post.pk, post_slug=post.slug)
+        else:
+            comment = CommentForm()
+    else:
+        comment = CommentForm()
+    return render(request, 'blog/post_detail.html', {'post': post, 'comment_form': comment})
 
-def add_comment(request, pk):
+def add_comment(request, pk, post_slug):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -28,11 +31,11 @@ def add_comment(request, pk):
             comment.post = post
             comment.save()
             messages.add_message(request, messages.INFO, 'Your message was added!')
-            return redirect('post_detail', pk=post.pk)
+            return redirect('post_detail', pk=post.pk, post_slug=post.slug)
     # if request is GET then show unbound form to the user
     else:
-        form = CommentForm()
-    return render(request, 'blog/post_detail.html', {'form': form})
+        comment = CommentForm()
+    return render(request, 'blog/post_detail.html', {'comment_form': comment})
 
 
 def post_cat(request):
@@ -45,28 +48,28 @@ def post_list(request):
 
 def contact(request):
     if request.method == 'POST':
-        f = ContactForm(request.POST)
-        if f.is_valid():
-            name = f.cleaned_data['name']
-            sender = f.cleaned_data['email']
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            sender = form.cleaned_data['email']
             subject = "You have a new message from {}:{}".format(name, sender)
             message = "Subject: {}\n\nMessage: {}".format(f.cleaned_data['subject'], f.cleaned_data['message'])
             mail_admins(subject, message)
-            f.save()
+            form.save()
             messages.add_message(request, messages.INFO, 'Submitted!')
             return redirect('contact')
     else:
-        f = ContactForm()
-    return render(request, 'blog/contact.html', {'form': f})
+        contact = ContactForm()
+    return render(request, 'blog/contact.html', {'contact_form': contact})
 
 @login_required
-def post_publish(request, pk):
+def post_publish(request, pk, post_slug):
     post = get_object_or_404(Post, pk=pk)
     post.publish()
-    return redirect('post_detail', pk=pk)
+    return redirect('post_detail', pk=pk, post_slug=post.slug)
 
 @login_required
-def post_edit(request, pk):
+def post_edit(request, pk, post_slug):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
@@ -74,7 +77,7 @@ def post_edit(request, pk):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('post_detail', pk=post.pk, post_slug=post.slug)
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
@@ -104,13 +107,13 @@ def post_draft_list(request):
     return render(request, 'blog/post_draft_list.html', {'posts': posts})
 
 @login_required
-def comment_approve(request, pk, slug):
-    comment = get_object_or_404(Comment, pk=pk, slug=slug)
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
     comment.approve()
-    return redirect('post_detail', pk=comment.post.pk)
+    return redirect('post_detail', pk=comment.post.pk, post_slug=comment.post.slug)
 
 @login_required
-def comment_remove(request, pk, slug):
-    comment = get_object_or_404(Comment, pk=pk, slug=slug)
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
-    return redirect('post_detail', pk=comment.post.pk)
+    return redirect('post_detail', pk=comment.post.pk, post_slug=comment.post.slug)

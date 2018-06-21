@@ -37,15 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'threadedcomments',
-    #'django.contrib.comments',
-    #'django_comments',
     'django.contrib.sites',
     'django.contrib.flatpages',
     'blog',
     'ckeditor',
     'ckeditor_uploader',
     'debug_toolbar',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -85,10 +83,6 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    #'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #}
      'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'foliodb',
@@ -175,7 +169,3 @@ ADMINS = [
 MANAGERS = ADMINS
 
 INTERNAL_IPS = '127.0.0.1'
-
-# Comment App
-
-#COMMENTS_APP = 'threadedcomments'
