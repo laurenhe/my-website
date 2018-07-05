@@ -30,7 +30,10 @@ class ContactAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email',)
     date_hierarchy = 'date'
 
+class CommentAdmin(admin.ModelAdmin):
+	list_display = ('name', 'email', 'message')
+
 admin.site.register(Post, PostAdmin)
-admin.site.register(Comment)
+admin.site.register(Comment, CommentAdmin)
 admin.site.register(Category)
 admin.site.register(Contact, ContactAdmin)

@@ -14,7 +14,7 @@ def post_detail(request, pk, post_slug):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
-            messages.add_message(request, messages.INFO, 'Your message was added!')
+            messages.success(request, 'Your message was added!')
             return redirect('post_detail', pk=post.pk, post_slug=post.slug)
         else:
             comment = CommentForm()
@@ -30,7 +30,7 @@ def add_comment(request, pk, post_slug):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
-            messages.add_message(request, messages.INFO, 'Your message was added!')
+            messages.success(request, 'Your message was added!')
             return redirect('post_detail', pk=post.pk, post_slug=post.slug)
     # if request is GET then show unbound form to the user
     else:

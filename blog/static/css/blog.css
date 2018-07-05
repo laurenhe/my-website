@@ -91,7 +91,7 @@ h2 {
 ==================================== */
 
 .main-header {
-  padding-top: 250px;
+  padding-top: 700px;
   height: 700px;
   background: linear-gradient(#1cb5e0, transparent 70%),
               linear-gradient(0deg, #fff, transparent),
@@ -112,7 +112,7 @@ h2 {
   font-weight: normal;
   line-height: 1.3;
   position: relative;
-  bottom: 110px;
+  bottom: 400px;
 }
 
 .post {
@@ -162,8 +162,8 @@ Form Layout Styles
 
 .form-field {
     margin: 10px auto;
-    max-width: 400px;
     padding: 0px 12px 10px 20px;
+    max-width: 400px;
 }
 
 .form-field input[type=text],
@@ -173,14 +173,14 @@ textarea {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    border:1px solid #BEBEBE;
-    padding: 7px;
-    margin:0px;
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
     -o-transition: all 0.30s ease-in-out;
     outline: none;
+    margin: 5px;
+    padding: 7px;
+    border:1px solid #BEBEBE;
 }
 
 .form-field input[type=text]:focus,
@@ -193,11 +193,18 @@ textarea {
     border: 1px solid #88D5E9;
 }
 
-#submit{
+label[for=id_name],
+label[for=id_email],
+label[for=id_message] {
+  margin: 5px;
+}
+
+#submit {
     background: #4B99AD;
-    padding: 8px 15px 8px 15px;
-    border: none;
     color: #fff;
+    border: none;
+    margin: 5px;
+    padding: 8px 15px 8px 15px;
 }
 
 #submit:hover {
@@ -218,9 +225,8 @@ Comment Layout Styles
 .comment {
   color: #348ba8;
   font-family: 'Josefin Sans';
-  margin: 5px auto;
-  max-width: 400px;
-  padding: 10px 12px 10px 10px;
+  margin: 20px auto;
+  padding: 7px;
 }
 
 .comment-btn {

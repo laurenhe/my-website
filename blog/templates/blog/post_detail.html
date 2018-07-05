@@ -34,8 +34,8 @@
 
 <!-- Post -->
 
-    <div class="post">
-        <p class="t-border post-content">{{ post.content|linebreaksbr }}</p>
+    <div class="post t-border post-content">
+        {{ post.content|linebreaksbr }}
         {% if user.is_authenticated %}
         <ul class="post-btns">
             {% if not post.published_date %}
@@ -60,38 +60,36 @@
             {{ hidden_field }}
           {% endfor %}
 
-          {% for field in comment_form.visible_fields %}
-            <div class="form-field">
+          <div class="form-field">
+            {% for field in comment_form.visible_fields %}
               {{ field.label_tag }}
               {% render_field field class="form-control" %}
-              {% if field.help_text %}
-              <small class="form-text text-muted">{{ field.help_text }}</small>
-              {% endif %}
+            {% endfor %}
+            <button id="submit">Submit</button>
+
+            <!-- Comments -->
+
+            <div class="comment">
+            {% for comment in post.comments.all %}
+                {% if user.is_authenticated or comment.approved_comment %}
+                    <strong>{{ comment.name }}</strong>
+                    <p>{{ comment.message|linebreaks }}</p>
+                    <div class="date">
+                        {{ comment.created_date }}
+                    </div>
+                    <div class="comment-btn">
+                        {% if not comment.approved_comment %}
+                            <a class="approve" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                            <a class="remove" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                        {% endif %}
+                    </div>
+               {% endif %}
+           {% endfor %}
             </div>
-          {% endfor %}
-          <button id="submit">Submit</button>
+
+          </div>
       </form>
     </div>
-
-<!-- Comments -->
-
-    {% for comment in post.comments.all %}
-        {% if user.is_authenticated or comment.approved_comment %}
-        <div class="comment">
-            <strong>{{ comment.name }}</strong>
-            <p>{{ comment.message|linebreaks }}</p>
-            <div class="date">
-                {{ comment.created_date }}
-            </div>
-            <div class="comment-btn">
-                {% if not comment.approved_comment %}
-                    <a class="approve" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
-                    <a class="remove" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-                {% endif %}
-            </div>
-        </div>
-       {% endif %}
-   {% endfor %}
 
     <footer class="main-footer">
         <span>Copyright &copy; 2018 Lauren He</span>
