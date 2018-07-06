@@ -5,7 +5,7 @@ asn1crypto==0.22.0
 astroid==1.4.9
 astropy==2.0
 attrs==17.2.0
-Automat==0.0.0
+Automat==0.3.0
 Babel==2.4.0
 backports.shutil-get-terminal-size==1.0.0
 beautifulsoup4==4.6.0
