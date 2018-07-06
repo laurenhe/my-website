@@ -121,7 +121,6 @@ ptyprocess==0.5.1
 py==1.4.34
 pyasn1==0.3.6
 pyasn1-modules==0.1.4
-pycosat==0.6.2
 pycparser==2.17
 pycrypto==2.6.1
 pycurl==7.43.0
