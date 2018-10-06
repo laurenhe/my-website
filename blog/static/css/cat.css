@@ -54,27 +54,34 @@ h1 {
 }
 
 /* Style the buttons */
-#myBtnContainer {
+#portfolioFilter {
   margin-left: 8px;
-}
-
-.btn {
-  border: none;
-  outline: none;
-  padding: 12px 16px;
-  background-color: #f1f1f1;
   cursor: pointer;
 }
 
-/* Add a grey background color on mouse-over */
-.btn:hover {
-  background-color: #ddd;
+.filter {
+  margin-right: 6px;
+  background-color: #fff;
+  color: #666;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  padding: 4px 15px;
+  border-radius: 50px;
+  display: inline-block;
 }
 
-/* Add a dark background color to the active button */
-.btn.active {
-  background-color: #666;
-   color: white;
+/* Add a grey background color on mouse-over */
+.filter:hover {
+  border: none;
+  background: #484848;
+  color: #f9f9f9;
+
+}
+
+.filter.active {
+  border: 1px solid #1e1e1e;
+  background: #484848;
+  color: #f9f9f9;
 }
 
 .column > .content{

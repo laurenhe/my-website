@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
-from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.sites.models import Site
 from django.urls import reverse
 
@@ -11,7 +10,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=False, blank=True,
                             help_text="Slug will be generated automatically from the title of the post")
-    content = RichTextUploadingField(blank=True)
+    content = models.TextField()
     created_date = models.DateTimeField(
             default=timezone.now)
     published_date = models.DateTimeField(

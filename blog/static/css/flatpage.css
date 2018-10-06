@@ -13,7 +13,7 @@
 }
 
 .primary {
-  padding-left: 1em;
+  padding-left: 2em;
 }
 
 .secondary {
@@ -44,6 +44,10 @@ img {
   .col {
     flex: 1;
   }
+
+	.primary {
+	  padding-left: 5em;
+	}
 
 }
 
